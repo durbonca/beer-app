@@ -12,7 +12,18 @@ const getBeers = async () => {
             
             beerData.map((beer)=> {
                 let beerEntry = document.createElement("div")
-                beerEntry.innerHTML = beer.name
+                beerEntry.innerHTML = `
+                <div class='beer-wrapper card'>
+                    <div class='beer'>
+                        <img class='beer__img' src="${beer.image_url}">
+                        <h3>${beer.name}</h3>
+                        <span class='beer__info'>
+                            <span>ABV: ${beer.abv}%</span>
+                            <span>IBU: ${beer.ibu}</span>
+                        </span>
+                    </div>
+                </div>
+                `
                 beersList[0].appendChild(beerEntry)
             })
         }
@@ -22,6 +33,5 @@ const getBeers = async () => {
     )
     
 }
-
 
 getBeers()
