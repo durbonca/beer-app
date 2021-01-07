@@ -5,7 +5,7 @@
 /* custom properties */
 :root {
     --off-white: #f2f2f2;
-    --black: rgba(0,0,16,-8);
+    --black: rgba(0,0,16,.8);
     --blue: #0365c0;
     --green: #00cc4f;
     --orange: #ffb144;
@@ -36,4 +36,103 @@ header{
 
 .container {
     padding: 1rem 2rem;
+}
+
+/* filters */
+.card{
+    display: flex;
+    background-color: white;
+    box-shadow: var(--shadow);
+}
+
+.filters{
+    display:grid;
+    grid-template-columns: repeat (auto-fill, minmax(300px, 1fr));
+    grid-gap: 1rem;
+    margin-bottom: 1rem;
+}
+.filter-card{
+    padding: .8rem;
+}
+
+.filter-container{
+    padding: .4rem .8rem;
+}
+
+.filter-text p{
+    color: var(--black);
+    font-size: 1.3rem;
+    padding: .3rem;
+}
+.filter {
+    background-color: var(--black);
+    padding: .4rem .4rem .1rem .4rem;
+    border: 3px solid var(--blue);
+    border-radius: 2.2rem;
+}
+
+.filter-form{
+    display: flex;
+    align-items: center;
+}
+.filter-all + span {
+    font-size: 2rem;
+    padding: .5rem 1rem;
+    color: var(--off-white);
+}
+svg {
+    fill: var(--off-white);
+    height: 2rem;
+    width: 2rem;
+    margin: .5rem;
+}
+
+input[type="radio"]{
+    position: absolute;
+    opacity: 0;
+}
+
+input + span, 
+input + svg {
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.filter-all:hover + span,
+.filter-all:checked + span,
+.filter-all:focus + span{
+    color: var(--blue);
+}
+
+.beer:hover + svg,
+.beer:checked + svg,
+.beer:focus + svg{
+    fill: var(--orange);
+}
+
+.hops:hover + svg,
+.hops:checked + svg,
+.hops:focus + svg{
+    fill: var(--green);
+}
+
+/* pagination buttons */
+
+.page-btn{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 2rem;
+    padding: 0 .8rem;
+    color: var(--off-white);
+    cursor: pointer;
+    transition: color .3s ease;
+}
+.page-btn:hover{
+    color: var(--blue)
+}
+
+.page-btn:disabled{
+    cursor: default;
+    color: var(--disabled);
 }
