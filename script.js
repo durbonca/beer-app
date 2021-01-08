@@ -1,15 +1,62 @@
 // variables
 const beersList = document.getElementsByClassName('beers')
 const urlBase = "https://api.punkapi.com/v2/beers";
+const filterABV = document.getElementById("filterABV")
+const filterIBU = document.getElementById("filterIBU")
+let optionsABV = ""
+let optionsIBU = ""
 
+// filters
+filterABV.addEventListener("change", e => {
+    const value = e.target.value
+    switch (value){
+        case "all":
+            optionsABV = ""
+        break
+        case "Weak":
+            optionsABV = "abv_lt=4.6"
+        break
+        case "Median":
+            optionsABV = "abv_gt=4.6&abv_lt=7.6"
+        break
+        case "Strong":
+            optionsABV = "abv_gt=7.5"
+        break
+    }
+    getBeers();
+})
+
+filterIBU.addEventListener("change", e => {
+    const value = e.target.value
+    switch (value){
+        case "all":
+            optionsIBU = ""
+        break
+        case "Weak":
+            optionsIBU = "ibu_lt=35"
+        break
+        case "Median":
+            optionsIBU = "ibu_gt=34&ibu_lt=75"
+        break
+        case "Strong":
+            optionsIBU = "ibu_gt=74"
+        break
+    }
+    getBeers();
+})
+
+// get the beers
 const getBeers = async () => {
-    await fetch(urlBase)
+    const url = urlBase + "?" + optionsABV + "&" + optionsIBU;
+    await fetch(url)
     .then(
         response => response.json()
     ).then(
         data => {
             let beerData = data
-            
+            while (beersList[0].firstChild) {
+                    beersList[0].removeChild(beersList[0].firstChild);
+            }
             beerData.map((beer)=> {
                 let beerEntry = document.createElement("div")
                 beerEntry.innerHTML = `
@@ -38,8 +85,6 @@ const getBeers = async () => {
     )
     .catch( err =>
         console.error(err)
-    )
-    
+    ) 
 }
-
 getBeers()
